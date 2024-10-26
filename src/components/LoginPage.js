@@ -1,6 +1,11 @@
 import React, { useState } from "react";
-import { Button, Grid2, Link, Paper, TextField } from "@mui/material";
+import { Button, Grid2, Input, Link, Paper, TextField } from "@mui/material";
 
+const data = [{
+  userName:"Mounika DN",
+  email:"mounika@gmail.com",
+  Password:"1234mouni"
+}]
 const LoginPage = () => {
   const paperStyle = {
     padding: 20,
@@ -9,28 +14,33 @@ const LoginPage = () => {
     margin: "20px auto",
   };
 
-  const [loginInfo, setLoginInfo] = useState({ UserName: "", Password: "" });
+  const [data,setData] = useState({userName:'',password:''})
+
+  const {userName,password} = data;
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setLoginInfo({ ...loginInfo, [name]: value });
-    console.log(e);
-  };
-  const handleLoginChange = (e) => {
+    console.log(e,"Event")
+    console.log(e.target.name,e.target.value,"Target Values")
+    setData({...data,[e.target.name]:[e.target.value]})
+  }
+  const handleLoginsubmit = (e) => {
     e.preventDefault();
+    console.log(data,"DATA")
   };
   return (
     <Paper elevation={5} style={paperStyle}>
       <Grid2 container>
         <label>Email or Mobile or Login Name</label>
         <TextField
-          value={""}
+          value={userName}
+          name='userName'
           type="text"
           fullWidth
           onChange={handleChange}
         />
         <label>Password</label>
         <TextField
-          value={""}
+          value={password}
+          name="password"
           onChange={handleChange}
           fullWidth
         />
@@ -41,7 +51,7 @@ const LoginPage = () => {
           type="submit "
           variant="contained"
           color="primary"
-          onClick={handleLoginChange}
+          onClick={handleLoginsubmit}
           fullWidth
         >
           Login
