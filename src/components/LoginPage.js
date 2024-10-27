@@ -26,7 +26,7 @@ const LoginPage = () => {
 
   const [data, setData] = useState({ userName: "", password: "" });
   const [loginSubmit, setLoginSubmit] = useState(false);
-
+  console.log(loginSubmit)
   const { userName, password } = data;
   const handleChange = (e) => {
     if (e.target.name === "userName" && e.target.value.length > 25) {
@@ -38,9 +38,15 @@ const LoginPage = () => {
   };
   const handleLoginsubmit = (e) => {
     e.preventDefault();
-    console.log(data,"DATA");
+    console.log(data.userName[0].length, data.password.length,"DATA");
+    // const regexp = /^\d{10}$/;
+    // if((data.userName[0].length > 25 ||  regexp.test(data.userName[0]))&& (data.password[0].length <= 10 )){
+    // console.log(loginSubmit,"Login")
+    //   setLoginSubmit(loginSubmit);
+    // }else {
+    //   setLoginSubmit(!loginSubmit);
+    // }
     
-    setLoginSubmit(true);
   };
 
   const handleLogOutsubmit = (e) => {
