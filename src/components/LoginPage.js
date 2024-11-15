@@ -32,13 +32,23 @@ const LoginPage = () => {
     if (e.target.name === "userName" && e.target.value.length > 25) {
       setData({ ...data, [e.target.name]: [] });
       console.log("Value entered is greater than 25 charecters");
-    } else {
+    }else if((e.target.name === "password" && e.target.value.length > 15)){
+      setData({ ...data, [e.target.name]: [] });
+    }
+    
+    else {
       setData({ ...data, [e.target.name]: [e.target.value] });
     }
   };
   const handleLoginsubmit = (e) => {
     e.preventDefault();
-    console.log(data.userName[0].length, data.password.length,"DATA");
+    if (data.userName  == "" || data.password == ""){
+      alert("Please Enter the values");
+    }
+    else {
+      setLoginSubmit(!loginSubmit);
+      setData("");
+    }
     // const regexp = /^\d{10}$/;
     // if((data.userName[0].length > 25 ||  regexp.test(data.userName[0]))&& (data.password[0].length <= 10 )){
     // console.log(loginSubmit,"Login")
@@ -60,7 +70,7 @@ const LoginPage = () => {
       <Grid2 container className="login-Success-section">
         {!loginSubmit ? (
           <Grid2>
-            <label>Email or Mobile or Login Name</label>
+            <label>Email or Mobile or UserName</label>
             <TextField
               value={userName}
               name="userName"
@@ -72,6 +82,7 @@ const LoginPage = () => {
             <label>Password</label>
             <TextField
               value={password}
+              type="password"
               name="password"
               onChange={handleChange}
               fullWidth
